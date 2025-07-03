@@ -1,1 +1,17 @@
 # jatin-stock-tracker
+on:
+  schedule:
+    - cron: '*/15 3-9 * * 1-5'  # IST में 9:15AM से 3:30PM तक हर 15 मिनट
+
+jobs:
+  run-tracker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: pip install requests beautifulsoup4 twilio
+
+      - name: Run Tracker Script
+        run: python jatin_stock_tracker_multi.py
